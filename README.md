@@ -23,24 +23,17 @@ functionality:
 
 Solution
 --------
-The solution is a web app built a Flask (Python) server and a sqlite3 database.
-It features graph-style database architecture and recursive graph query
-functionality.
+The solution is a web app built using a Flask (Python) server and a sqlite3
+database. It features graph-style database architecture and recursive graph
+query functionality.
 
 The routing and application bootstrapping is contained in `app.py`, while the
-sql query functionality is contained in `db.py`. The database schema is house in
-`schema.sql`.
+sql query functionality is contained in `db.py`. The database schema is housed
+in `schema.sql`.
 
 Very little boilerplate was used, but the database connection functions in
-app.py are very standard and do not contain original code: init_db,
-get_db, query_db, close_db.
-
-My Level of Experience
-----------------------
-Before this challenge, I'd never done any front-end or back-end web development.
-I had a good deal of experience in Python, but none in Flask or React/JavaScript
-(so I learned them both in the process, as well as general networking
-knowledge).
+app.py are very standard and do not contain original code: `connect_db`,
+`init_db`, `get_db`, `query_db`, `close_db`.
 
 Local Installation Instructions
 -------------------------------
@@ -49,7 +42,7 @@ Local Installation Instructions
 
 1. Clone the repository
 
-2. **In terminal at home folder:**
+2. **In terminal in any working directory:**
 
   * pip install flask
 
