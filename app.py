@@ -82,7 +82,6 @@ def post_pen():
         return make_response(jsonify({'error': 'Bad request'}), 400)
 
 
-# TODO prevent duplication if same part PUT to server twice
 @app.route('/factory/<int:pen_id>/parts', methods=['PUT', 'DELETE'])
 def edit_part(pen_id):
     try:
@@ -96,7 +95,6 @@ def edit_part(pen_id):
         return make_response(jsonify({'error': 'Bad request'}), 400)
 
 
-# TODO prevent duplication if same edge PUT to server twice
 @app.route('/factory/<int:pen_id>/assemblies', methods=['PUT', 'DELETE'])
 def edit_edge(pen_id):
     try:
