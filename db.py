@@ -9,8 +9,8 @@ def get_pens():
     return app.query_db("select * from pens;")
 
 
-def create_part(title, pen_id):
-    app.edit_db("insert into nodes (title, num_children, num_parents, pen_id) values (?, 0, 0, ?);", (title, pen_id))
+def create_part(part_name, pen_id):
+    app.edit_db("insert into nodes (part_name, num_children, num_parents, pen_id) values (?, 0, 0, ?);", (part_name, pen_id))
 
 
 def remove_part(id):
@@ -35,6 +35,10 @@ def remove_edge(from_node_id, to_node_id):
     app.edit_db("update nodes set num_children = num_children - 1 where id=?;", (from_node_id,))
 
 
+def get_part_by_name(part_name, pen_id):
+    return app.query_db("select * from nodes where part_name=? and pen_id=?", (part_name, pen_id), True)
+
+
 def get_part(id, all=False, pen_id=None):
     if all and pen_id is None:
         return app.query_db("select * from nodes;")
@@ -43,22 +47,22 @@ def get_part(id, all=False, pen_id=None):
     return app.query_db("select * from nodes where id=?;", (id,), True)
 
 
-def get_assembly_subset(children, parents=None):
+def get_assembly_subset(pen_id, children, parents=None):
     # All assemblies
     if children and parents is None:
-        return app.query_db("select * from nodes where num_children>0;")
+        return app.query_db("select * from nodes where num_children>0 and pen_id=?;", (pen_id,))
     # All top-level assemblies
     elif children and not parents:
-        return app.query_db("select * from nodes where num_children>0 and num_parents<1;")
+        return app.query_db("select * from nodes where num_children>0 and num_parents<1 and pen_id=?;", (pen_id,))
     # All subassemblies
     elif children and parents:
-        return app.query_db("select * from nodes where num_children>0 and num_parents>0;")
+        return app.query_db("select * from nodes where num_children>0 and num_parents>0 and pen_id=?;", (pen_id,))
     # All component parts
     elif not children and parents:
-        return app.query_db("select * from nodes where num_children<1 and num_parents>0;")
+        return app.query_db("select * from nodes where num_children<1 and num_parents>0 and pen_id=?;", (pen_id,))
     # All orphan parts
     elif not children and not parents:
-        return app.query_db("select * from nodes where num_children<1 and num_parents<1;")
+        return app.query_db("select * from nodes where num_children<1 and num_parents<1 and pen_id=?;", (pen_id,))
 
 
 def get_first_level_children(id):

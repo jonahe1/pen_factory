@@ -10,7 +10,7 @@ create table pens (
 
 create table nodes (
   id integer primary key autoincrement,
-  title text not null,
+  part_name text not null,
   num_children integer not null,
   num_parents integer not null,
   pen_id integer not null, foreign key (pen_id) references pens(id)
