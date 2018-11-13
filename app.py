@@ -2,6 +2,7 @@ from flask_restful import Resource, Api
 import os
 import sqlite3
 from flask import Flask, request, session, g, abort, jsonify, make_response
+import db
 
 app = Flask(__name__)
 app.config.from_object(__name__)  # load config from this file , app.py
@@ -67,11 +68,12 @@ def query_db(query, args=(), one=False):
     cur.close()
     return (rv[0] if rv else None) if one else rv
 
-def update_db(query, args=()):
-    conn = get_db().cursor()
-    conn.execute(query, args)
-    conn.commit()
-    conn.close()
+
+def edit_db(query, args=()):
+    curr = get_db().execute(query, args)
+    print(query)
+    curr.close()
+
 
 # Serves index.html file to homepage get request
 @app.route('/', methods=['GET'])

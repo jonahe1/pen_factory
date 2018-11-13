@@ -11,14 +11,14 @@ create table pens (
 create table nodes (
   id integer primary key autoincrement,
   title text not null,
-  has_children integer not null,
-  has_parent integer not null,
+  num_children integer not null,
+  num_parents integer not null,
   pen_id integer not null, foreign key (pen_id) references pens(id)
 );
 
 create table edges (
   id integer primary key autoincrement,
-  from_graph_id integer not null,
+  from_node_id integer not null,
   to_node_id integer not null,
   pen_id integer not null, foreign key (pen_id) references pens(id)
 );
