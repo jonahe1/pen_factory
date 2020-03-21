@@ -1,4 +1,4 @@
-Sila Nanotechnologies Coding Challenge:
+Pen Factory Coding Challenge:
 ============================
 
 Problem
